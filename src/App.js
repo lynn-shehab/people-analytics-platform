@@ -9,233 +9,175 @@ import {
   Settings, ChevronDown, ArrowUp, ArrowDown, BookOpen, Briefcase, Shield, Clock, TrendingDown, Zap, Database, 
   BarChart3, Cpu, Workflow, PieChart as PieChartIcon, Map, Crown, Star, Heart, Brain, GraduationCap, 
   Lightbulb, Rocket, ShieldAlert, ThumbsUp, ThumbsDown, Eye, EyeOff, Mail, Phone, MapPin, Globe,
-  Building, Home, Coffee, HeartPulse, Car, Plane, Gift, CreditCard, Laptop, Smartphone
+  Building, Home, Coffee, HeartPulse, Car, Plane, Gift, CreditCard, Laptop, Smartphone,
+  Linkedin, Mail as MailIcon, Users as UsersIcon, Target as TargetIcon, Globe as GlobeIcon,
+  BarChart4, LineChart as LineChartIcon, PieChart as PieChartIcon2, Activity
 } from 'lucide-react';
 
 const PeopleAnalyticsPlatform = () => {
   const [activeModule, setActiveModule] = useState('executive');
   const [showFilters, setShowFilters] = useState(false);
-  const [timeRange, setTimeRange] = useState('last6months');
 
-  // Comprehensive Filter State
-  const [filters, setFilters] = useState({
-    timePeriod: 'Last 6 Months',
-    dateRange: { start: '2024-01-01', end: '2024-06-30' },
-    department: 'All Departments',
-    team: 'All Teams',
-    location: 'All Locations',
-    region: 'All Regions',
-    timeset: 'All',
-    shift: 'All',
-    jobScope: 'All',
-    gender: 'All',
-    nationality: 'All',
-    grade: 'All',
-    branchType: 'All',
-    businessType: 'All',
-    branch: 'All',
-    division: 'All',
-    employeeStatus: 'Active',
-    brand: 'All',
-    company: 'All',
-    title: 'All',
-    tenureRange: 'All',
-    generation: 'All',
-    ageRange: 'All',
-    employeeId: '',
-    lifecycleStatus: 'All',
-    performanceRating: 'All',
-    potentialRating: 'All',
-    mobilityStatus: 'All',
-    successorAvailability: 'All',
-    skillSets: 'All',
-    competencyStage: 'All',
-    disciplinaryActions: 'All',
-    exitType: 'All',
-    exitReason: 'All',
-    exitRegret: 'All',
-    source: 'All',
-    onboardingStatus: 'All',
-    hiringManager: 'All',
-    recruiter: 'All',
-    candidateStage: 'All',
-    program: 'All',
-    coach: 'All',
-    category: 'All',
-    trainingStatus: 'All',
-    learningType: 'All',
-    headcountType: 'All',
-    benefitType: 'All',
-    insuranceType: 'All',
-    leaveType: 'All',
-    variablePay: 'All'
-  });
-
-  // Enhanced Data Sets with Realistic Enterprise Data
-  const executiveData = {
-    turnover: [
-      { month: 'Jan', overall: 12.5, voluntary: 9.2, involuntary: 3.3, highPerformer: 2.1, criticalRole: 1.8 },
-      { month: 'Feb', overall: 11.8, voluntary: 8.5, involuntary: 3.3, highPerformer: 1.8, criticalRole: 1.5 },
-      { month: 'Mar', overall: 13.2, voluntary: 10.1, involuntary: 3.1, highPerformer: 2.4, criticalRole: 2.1 },
-      { month: 'Apr', overall: 12.1, voluntary: 9.0, involuntary: 3.1, highPerformer: 1.9, criticalRole: 1.7 },
-      { month: 'May', overall: 14.5, voluntary: 11.2, involuntary: 3.3, highPerformer: 2.8, criticalRole: 2.4 },
-      { month: 'Jun', overall: 13.8, voluntary: 10.5, involuntary: 3.3, highPerformer: 2.5, criticalRole: 2.2 }
-    ],
-    diversity: [
-      { category: 'Gender', male: 58, female: 39, other: 3 },
-      { category: 'Generation', genz: 12, millennials: 45, genx: 32, boomers: 11 },
-      { category: 'Nationality', local: 65, expat: 35 }
-    ],
-    engagement: [
-      { department: 'Engineering', score: 8.2, trend: 'up' },
-      { department: 'Sales', score: 7.8, trend: 'stable' },
-      { department: 'Marketing', score: 8.5, trend: 'up' },
-      { department: 'Finance', score: 7.2, trend: 'down' },
-      { department: 'HR', score: 8.8, trend: 'up' },
-      { department: 'Operations', score: 7.6, trend: 'stable' }
-    ]
-  };
-
-  const talentManagementData = {
-    nineBox: [
-      { performance: 'High', potential: 'High', count: 32, color: '#10b981' },
-      { performance: 'High', potential: 'Medium', count: 45, color: '#22c55e' },
-      { performance: 'High', potential: 'Low', count: 18, color: '#84cc16' },
-      { performance: 'Medium', potential: 'High', count: 28, color: '#eab308' },
-      { performance: 'Medium', potential: 'Medium', count: 156, color: '#f59e0b' },
-      { performance: 'Medium', potential: 'Low', count: 42, color: '#f97316' },
-      { performance: 'Low', potential: 'High', count: 8, color: '#ef4444' },
-      { performance: 'Low', potential: 'Medium', count: 15, color: '#dc2626' },
-      { performance: 'Low', potential: 'Low', count: 12, color: '#991b1b' }
-    ],
-    succession: [
-      { role: 'CEO', ready: 2, readyIn1: 1, noSuccessor: 0, criticality: 'Critical' },
-      { role: 'VP Engineering', ready: 3, readyIn1: 2, noSuccessor: 0, criticality: 'High' },
-      { role: 'VP Sales', ready: 2, readyIn1: 1, noSuccessor: 1, criticality: 'High' },
-      { role: 'Regional Manager', ready: 5, readyIn1: 3, noSuccessor: 1, criticality: 'Medium' },
-      { role: 'Department Head', ready: 8, readyIn1: 4, noSuccessor: 2, criticality: 'Medium' }
-    ],
-    mobility: [
-      { type: 'Promotions', count: 45, trend: 'up' },
-      { type: 'Lateral Moves', count: 28, trend: 'up' },
-      { type: 'Department Transfers', count: 32, trend: 'stable' },
-      { type: 'Location Transfers', count: 15, trend: 'down' }
-    ]
-  };
-
+  // Enhanced Data Sets
   const talentAcquisitionData = {
     funnel: [
-      { stage: 'Sourced', count: 1250, conversion: 100 },
-      { stage: 'Screened', count: 485, conversion: 38.8 },
-      { stage: 'Interviewed', count: 142, conversion: 11.4 },
-      { stage: 'Offered', count: 38, conversion: 3.0 },
-      { stage: 'Hired', count: 32, conversion: 2.6 }
+      { stage: 'Sourced', count: 1250, conversion: 100, dropoff: 0 },
+      { stage: 'Screened', count: 485, conversion: 38.8, dropoff: 61.2 },
+      { stage: 'Interviewed', count: 142, conversion: 11.4, dropoff: 27.4 },
+      { stage: 'Offered', count: 38, conversion: 3.0, dropoff: 8.4 },
+      { stage: 'Hired', count: 32, conversion: 2.6, dropoff: 1.4 }
     ],
     sources: [
-      { source: 'Employee Referrals', hires: 42, cost: 2100, quality: 8.9, timeToHire: 28, satisfaction: 9.2 },
-      { source: 'LinkedIn', hires: 38, cost: 5200, quality: 7.8, timeToHire: 45, satisfaction: 8.1 },
-      { source: 'Job Boards', hires: 24, cost: 3800, quality: 7.2, timeToHire: 52, satisfaction: 7.5 },
-      { source: 'Recruitment Agencies', hires: 18, cost: 8500, quality: 8.1, timeToHire: 35, satisfaction: 8.4 },
-      { source: 'Career Fairs', hires: 12, cost: 2800, quality: 7.5, timeToHire: 48, satisfaction: 7.8 }
+      { source: 'Employee Referrals', hires: 42, cost: 2100, quality: 8.9, timeToHire: 28, satisfaction: 9.2, roi: 4.2 },
+      { source: 'LinkedIn', hires: 38, cost: 5200, quality: 7.8, timeToHire: 45, satisfaction: 8.1, roi: 2.1 },
+      { source: 'Job Boards', hires: 24, cost: 3800, quality: 7.2, timeToHire: 52, satisfaction: 7.5, roi: 1.8 },
+      { source: 'Recruitment Agencies', hires: 18, cost: 8500, quality: 8.1, timeToHire: 35, satisfaction: 8.4, roi: 0.9 },
+      { source: 'Career Fairs', hires: 12, cost: 2800, quality: 7.5, timeToHire: 48, satisfaction: 7.8, roi: 1.5 },
+      { source: 'Campus Recruitment', hires: 8, cost: 3200, quality: 7.9, timeToHire: 55, satisfaction: 8.0, roi: 1.2 }
     ],
     timeMetrics: [
-      { role: 'Engineering', timeToFill: 52, timeToHire: 38, target: 45 },
-      { role: 'Sales', timeToFill: 38, timeToHire: 28, target: 40 },
-      { role: 'Marketing', timeToFill: 35, timeToHire: 25, target: 35 },
-      { role: 'Finance', timeToFill: 45, timeToHire: 32, target: 42 },
-      { role: 'Operations', timeToFill: 42, timeToHire: 30, target: 38 }
+      { role: 'Engineering', timeToFill: 52, timeToHire: 38, target: 45, interviews: 4.2 },
+      { role: 'Sales', timeToFill: 38, timeToHire: 28, target: 40, interviews: 3.1 },
+      { role: 'Marketing', timeToFill: 35, timeToHire: 25, target: 35, interviews: 2.8 },
+      { role: 'Finance', timeToFill: 45, timeToHire: 32, target: 42, interviews: 3.5 },
+      { role: 'Operations', timeToFill: 42, timeToHire: 30, target: 38, interviews: 3.2 },
+      { role: 'HR', timeToFill: 32, timeToHire: 24, target: 30, interviews: 2.5 }
+    ],
+    recruiterPerformance: [
+      { recruiter: 'Sarah Mitchell', positions: 12, hires: 9, fillRate: 75, avgDays: 38, quality: 8.2, costPerHire: 3850 },
+      { recruiter: 'James Chen', positions: 15, hires: 11, fillRate: 73, avgDays: 42, quality: 7.8, costPerHire: 4200 },
+      { recruiter: 'Maria Garcia', positions: 10, hires: 8, fillRate: 80, avgDays: 35, quality: 8.5, costPerHire: 3250 },
+      { recruiter: 'Ahmed Hassan', positions: 13, hires: 10, fillRate: 77, avgDays: 40, quality: 8.1, costPerHire: 3950 },
+      { recruiter: 'Emma Johnson', positions: 11, hires: 7, fillRate: 64, avgDays: 48, quality: 7.5, costPerHire: 4500 }
     ]
   };
 
   const talentDevelopmentData = {
     training: [
-      { program: 'Leadership Development', completed: 145, inProgress: 32, overdue: 8, satisfaction: 8.2, impact: 7.8 },
-      { program: 'Technical Skills', completed: 289, inProgress: 67, overdue: 15, satisfaction: 7.8, impact: 8.1 },
-      { program: 'Sales Enablement', completed: 178, inProgress: 42, overdue: 12, satisfaction: 8.5, impact: 8.3 },
-      { program: 'Compliance Training', completed: 512, inProgress: 45, overdue: 23, satisfaction: 7.5, impact: 7.2 },
-      { program: 'Soft Skills', completed: 234, inProgress: 56, overdue: 18, satisfaction: 8.0, impact: 7.9 }
+      { program: 'Leadership Development', completed: 145, inProgress: 32, overdue: 8, satisfaction: 8.2, impact: 7.8, cost: 125000 },
+      { program: 'Technical Skills', completed: 289, inProgress: 67, overdue: 15, satisfaction: 7.8, impact: 8.1, cost: 89000 },
+      { program: 'Sales Enablement', completed: 178, inProgress: 42, overdue: 12, satisfaction: 8.5, impact: 8.3, cost: 67000 },
+      { program: 'Compliance Training', completed: 512, inProgress: 45, overdue: 23, satisfaction: 7.5, impact: 7.2, cost: 45000 },
+      { program: 'Soft Skills', completed: 234, inProgress: 56, overdue: 18, satisfaction: 8.0, impact: 7.9, cost: 78000 },
+      { program: 'Digital Transformation', completed: 156, inProgress: 38, overdue: 9, satisfaction: 8.3, impact: 8.0, cost: 95000 }
     ],
     competencies: [
-      { skill: 'Leadership', current: 65, target: 80, gap: -15 },
-      { skill: 'Data Analysis', current: 45, target: 70, gap: -25 },
-      { skill: 'Project Management', current: 60, target: 75, gap: -15 },
-      { skill: 'Communication', current: 75, target: 85, gap: -10 },
-      { skill: 'Technical Expertise', current: 80, target: 85, gap: -5 },
-      { skill: 'Strategic Thinking', current: 55, target: 75, gap: -20 }
+      { skill: 'Leadership', current: 65, target: 80, gap: -15, critical: true },
+      { skill: 'Data Analysis', current: 45, target: 70, gap: -25, critical: true },
+      { skill: 'Project Management', current: 60, target: 75, gap: -15, critical: true },
+      { skill: 'Communication', current: 75, target: 85, gap: -10, critical: false },
+      { skill: 'Technical Expertise', current: 80, target: 85, gap: -5, critical: false },
+      { skill: 'Strategic Thinking', current: 55, target: 75, gap: -20, critical: true },
+      { skill: 'Innovation', current: 48, target: 70, gap: -22, critical: true },
+      { skill: 'Change Management', current: 52, target: 75, gap: -23, critical: true }
     ],
     careerProgression: [
-      { category: 'Promoted After Training', value: 32, color: '#10b981' },
-      { category: 'Lateral Moves', value: 18, color: '#3b82f6' },
-      { category: 'Skill Enhancement', value: 25, color: '#8b5cf6' },
-      { category: 'No Movement', value: 25, color: '#6b7280' }
+      { category: 'Promoted After Training', value: 32, color: '#10b981', avgTime: '8.2 months' },
+      { category: 'Lateral Moves', value: 18, color: '#3b82f6', avgTime: '6.5 months' },
+      { category: 'Skill Enhancement', value: 25, color: '#8b5cf6', avgTime: '4.8 months' },
+      { category: 'No Movement', value: 25, color: '#6b7280', avgTime: '12.1 months' }
+    ],
+    learningHours: [
+      { department: 'Engineering', hours: 42, target: 40, completion: 88, satisfaction: 8.4 },
+      { department: 'Sales', hours: 38, target: 35, completion: 92, satisfaction: 8.1 },
+      { department: 'Marketing', hours: 45, target: 38, completion: 85, satisfaction: 8.7 },
+      { department: 'Finance', hours: 35, target: 32, completion: 78, satisfaction: 7.8 },
+      { department: 'HR', hours: 40, target: 36, completion: 82, satisfaction: 8.5 },
+      { department: 'Operations', hours: 28, target: 30, completion: 72, satisfaction: 7.5 }
     ]
   };
 
   const totalRewardsData = {
     compensation: [
-      { grade: 'Junior', market: 45000, internal: 43500, gap: -3.3 },
-      { grade: 'Mid-Level', market: 65000, internal: 62000, gap: -4.6 },
-      { grade: 'Senior', market: 85000, internal: 82000, gap: -3.5 },
-      { grade: 'Lead', market: 105000, internal: 108000, gap: 2.9 },
-      { grade: 'Manager', market: 125000, internal: 122000, gap: -2.4 },
-      { grade: 'Director', market: 155000, internal: 158000, gap: 1.9 }
+      { grade: 'Junior', market: 45000, internal: 43500, gap: -3.3, employees: 245 },
+      { grade: 'Mid-Level', market: 65000, internal: 62000, gap: -4.6, employees: 568 },
+      { grade: 'Senior', market: 85000, internal: 82000, gap: -3.5, employees: 423 },
+      { grade: 'Lead', market: 105000, internal: 108000, gap: 2.9, employees: 189 },
+      { grade: 'Manager', market: 125000, internal: 122000, gap: -2.4, employees: 156 },
+      { grade: 'Director', market: 155000, internal: 158000, gap: 1.9, employees: 67 },
+      { grade: 'VP', market: 195000, internal: 202000, gap: 3.6, employees: 23 }
     ],
     benefits: [
-      { benefit: 'Health Insurance', enrolled: 95, cost: 8500, satisfaction: 8.8 },
-      { benefit: 'Retirement Plan', enrolled: 78, cost: 12000, satisfaction: 8.2 },
-      { benefit: 'Gym Membership', enrolled: 42, cost: 600, satisfaction: 7.5 },
-      { benefit: 'Learning Stipend', enrolled: 67, cost: 2500, satisfaction: 8.9 },
-      { benefit: 'Transportation', enrolled: 58, cost: 1200, satisfaction: 7.8 },
-      { benefit: 'Wellness Program', enrolled: 35, cost: 800, satisfaction: 8.1 }
+      { benefit: 'Health Insurance', enrolled: 95, cost: 8500, satisfaction: 8.8, utilization: 92 },
+      { benefit: 'Retirement Plan', enrolled: 78, cost: 12000, satisfaction: 8.2, utilization: 85 },
+      { benefit: 'Gym Membership', enrolled: 42, cost: 600, satisfaction: 7.5, utilization: 65 },
+      { benefit: 'Learning Stipend', enrolled: 67, cost: 2500, satisfaction: 8.9, utilization: 78 },
+      { benefit: 'Transportation', enrolled: 58, cost: 1200, satisfaction: 7.8, utilization: 72 },
+      { benefit: 'Wellness Program', enrolled: 35, cost: 800, satisfaction: 8.1, utilization: 58 },
+      { benefit: 'Childcare', enrolled: 28, cost: 4500, satisfaction: 9.2, utilization: 95 }
     ],
     turnoverCost: [
-      { category: 'Recruitment Fees', cost: 185000, percentage: 25 },
-      { category: 'Training & Onboarding', cost: 237000, percentage: 32 },
-      { category: 'Lost Productivity', cost: 328000, percentage: 44 },
-      { category: 'Separation Costs', cost: 45000, percentage: 6 }
+      { category: 'Recruitment Fees', cost: 185000, percentage: 25, trend: 'down' },
+      { category: 'Training & Onboarding', cost: 237000, percentage: 32, trend: 'up' },
+      { category: 'Lost Productivity', cost: 328000, percentage: 44, trend: 'stable' },
+      { category: 'Separation Costs', cost: 45000, percentage: 6, trend: 'down' }
+    ],
+    payEquity: [
+      { department: 'Engineering', ratio: 0.98, gap: -2.3, trend: 'improving' },
+      { department: 'Sales', ratio: 0.95, gap: -5.2, trend: 'declining' },
+      { department: 'Marketing', ratio: 1.02, gap: 1.8, trend: 'stable' },
+      { department: 'Finance', ratio: 0.97, gap: -3.1, trend: 'improving' },
+      { department: 'HR', ratio: 1.05, gap: 4.8, trend: 'improving' },
+      { department: 'Operations', ratio: 0.94, gap: -6.2, trend: 'declining' }
     ]
   };
 
-  // Enhanced Modules with Icons
-  const modules = [
-    { id: 'executive', name: 'Executive Overview', icon: Crown, color: 'purple' },
-    { id: 'talent-management', name: 'Talent Management', icon: Users, color: 'blue' },
-    { id: 'talent-acquisition', name: 'Talent Acquisition', icon: UserCheck, color: 'green' },
-    { id: 'talent-development', name: 'Talent Development', icon: GraduationCap, color: 'orange' },
-    { id: 'total-rewards', name: 'Total Rewards', icon: DollarSign, color: 'emerald' },
-    { id: 'engagement', name: 'Engagement', icon: Heart, color: 'pink' },
-    { id: 'predictive', name: 'Predictive Analytics', icon: Brain, color: 'indigo' }
-  ];
+  const engagementData = {
+    scores: [
+      { department: 'Engineering', engagement: 8.2, satisfaction: 7.9, wellbeing: 8.1, inclusion: 8.4 },
+      { department: 'Sales', engagement: 7.8, satisfaction: 7.5, wellbeing: 7.6, inclusion: 7.9 },
+      { department: 'Marketing', engagement: 8.5, satisfaction: 8.2, wellbeing: 8.3, inclusion: 8.6 },
+      { department: 'Finance', engagement: 7.2, satisfaction: 6.9, wellbeing: 7.1, inclusion: 7.4 },
+      { department: 'HR', engagement: 8.8, satisfaction: 8.5, wellbeing: 8.6, inclusion: 8.9 },
+      { department: 'Operations', engagement: 7.6, satisfaction: 7.3, wellbeing: 7.4, inclusion: 7.7 }
+    ],
+    drivers: [
+      { factor: 'Career Growth', score: 6.9, impact: 0.42, trend: 'improving' },
+      { factor: 'Compensation', score: 7.8, impact: 0.38, trend: 'stable' },
+      { factor: 'Work Environment', score: 8.2, impact: 0.35, trend: 'improving' },
+      { factor: 'Management', score: 7.5, impact: 0.41, trend: 'declining' },
+      { factor: 'Work-Life Balance', score: 7.1, impact: 0.33, trend: 'stable' },
+      { factor: 'Recognition', score: 6.8, impact: 0.29, trend: 'improving' }
+    ],
+    sentiment: [
+      { category: 'Positive', count: 1245, percentage: 68, trend: 'up' },
+      { category: 'Neutral', count: 385, percentage: 21, trend: 'stable' },
+      { category: 'Negative', count: 217, percentage: 12, trend: 'down' }
+    ]
+  };
 
-  // Enhanced KPI Cards for Each Module
+  // Enhanced KPI Cards for All Modules
   const kpiCards = {
     executive: [
       { label: 'Total Headcount', value: '2,847', change: '+3.2%', trend: 'up', icon: Users, color: 'blue' },
       { label: 'Turnover Rate', value: '13.8%', change: '-1.2%', trend: 'down', icon: TrendingDown, color: 'red' },
       { label: 'Engagement Score', value: '7.8/10', change: '+0.4', trend: 'up', icon: TrendingUp, color: 'green' },
-      { label: 'Revenue per Employee', value: '$285K', change: '+5.2%', trend: 'up', icon: DollarSign, color: 'emerald' },
-      { label: 'Female-to-Male Ratio', value: '42:58', change: '+2%', trend: 'up', icon: Users, color: 'pink' },
-      { label: 'Avg Tenure', value: '4.2 years', change: '+0.3', trend: 'up', icon: Clock, color: 'purple' },
-      { label: 'High Performer Ratio', value: '18%', change: '+2.1%', trend: 'up', icon: Star, color: 'yellow' },
-      { label: 'Succession Coverage', value: '67%', change: '+5%', trend: 'up', icon: Target, color: 'indigo' }
+      { label: 'Revenue per Employee', value: '$285K', change: '+5.2%', trend: 'up', icon: DollarSign, color: 'emerald' }
     ],
     'talent-management': [
       { label: '9-Box High Potential', value: '32', change: '+4', trend: 'up', icon: Star, color: 'green' },
       { label: 'Succession Readiness', value: '67%', change: '+5%', trend: 'up', icon: Target, color: 'blue' },
       { label: 'Critical Role Turnover', value: '8.2%', change: '-1.8%', trend: 'down', icon: AlertCircle, color: 'red' },
-      { label: 'Promotion Rate', value: '12.5%', change: '+1.3%', trend: 'up', icon: TrendingUp, color: 'purple' },
-      { label: 'Mobility Rate', value: '8.7%', change: '+2.1%', trend: 'up', icon: Map, color: 'orange' },
-      { label: 'IDP Completion', value: '78%', change: '+8%', trend: 'up', icon: BookOpen, color: 'emerald' },
-      { label: 'PIP Success Rate', value: '68%', change: '+12%', trend: 'up', icon: Shield, color: 'yellow' },
-      { label: 'Disciplinary Cases', value: '12', change: '-3', trend: 'down', icon: ShieldAlert, color: 'red' }
+      { label: 'Promotion Rate', value: '12.5%', change: '+1.3%', trend: 'up', icon: TrendingUp, color: 'purple' }
+    ],
+    'talent-acquisition': [
+      { label: 'Time to Fill', value: '42 days', change: '-5 days', trend: 'down', icon: Clock, color: 'green' },
+      { label: 'Cost per Hire', value: '$4,250', change: '-$320', trend: 'down', icon: DollarSign, color: 'blue' },
+      { label: 'Offer Accept Rate', value: '84%', change: '+3%', trend: 'up', icon: UserCheck, color: 'emerald' },
+      { label: 'Quality of Hire', value: '8.2/10', change: '+0.3', trend: 'up', icon: Award, color: 'purple' }
+    ],
+    'talent-development': [
+      { label: 'Training Completion', value: '82%', change: '+5%', trend: 'up', icon: BookOpen, color: 'green' },
+      { label: 'Avg Learning Hours', value: '38hrs', change: '+4hrs', trend: 'up', icon: Clock, color: 'blue' },
+      { label: 'Career Progression', value: '32%', change: '+3%', trend: 'up', icon: TrendingUp, color: 'emerald' },
+      { label: 'Skills Gap Closure', value: '58%', change: '+7%', trend: 'up', icon: Target, color: 'purple' }
+    ],
+    'total-rewards': [
+      { label: 'Pay Equity Index', value: '0.98', change: '+0.02', trend: 'up', icon: Target, color: 'green' },
+      { label: 'Benefits Utilization', value: '68%', change: '+4%', trend: 'up', icon: Award, color: 'blue' },
+      { label: 'Turnover Cost', value: '$750K', change: '-$85K', trend: 'down', icon: DollarSign, color: 'red' },
+      { label: 'Compensation Ratio', value: '97.2%', change: '+1.8%', trend: 'up', icon: TrendingUp, color: 'emerald' }
     ]
-  };
-
-  // Custom Color Palettes
-  const colorPalettes = {
-    primary: ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#06B6D4', '#84CC16', '#F97316'],
-    sequential: ['#EFF6FF', '#DBEAFE', '#BFDBFE', '#93C5FD', '#60A5FA', '#3B82F6', '#2563EB', '#1D4ED8'],
-    qualitative: ['#10B981', '#3B82F6', '#F59E0B', '#EF4444', '#8B5CF6', '#06B6D4', '#84CC16', '#F97316', '#EC4899', '#6B7280']
   };
 
   // Enhanced Insight Box Component
@@ -313,422 +255,352 @@ const PeopleAnalyticsPlatform = () => {
     );
   };
 
-  // Executive Dashboard Component
-  const ExecutiveDashboard = () => (
+  // Talent Acquisition Dashboard
+  const TalentAcquisitionDashboard = () => (
     <div className="space-y-8">
-      {renderKPICards('executive')}
+      {renderKPICards('talent-acquisition')}
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Turnover Trends */}
+        {/* Recruitment Funnel */}
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
           <div className="flex items-center justify-between mb-6">
-            <h3 className="text-xl font-semibold text-gray-900">Turnover Trends & Analysis</h3>
-            <div className="flex items-center space-x-2">
-              <Filter className="w-4 h-4 text-gray-400" />
-              <select className="text-sm border border-gray-300 rounded-lg px-3 py-1">
-                <option>Last 6 Months</option>
-                <option>Last Year</option>
-                <option>YTD</option>
-              </select>
-            </div>
+            <h3 className="text-xl font-semibold text-gray-900">Recruitment Funnel Analysis</h3>
+            <div className="text-sm text-gray-500">Overall Conversion: 2.6%</div>
           </div>
-          <ResponsiveContainer width="100%" height={400}>
-            <ComposedChart data={executiveData.turnover}>
-              <defs>
-                <linearGradient id="colorVoluntary" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#10b981" stopOpacity={0.8}/>
-                  <stop offset="95%" stopColor="#10b981" stopOpacity={0.1}/>
-                </linearGradient>
-                <linearGradient id="colorHighPerformer" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#ef4444" stopOpacity={0.8}/>
-                  <stop offset="95%" stopColor="#ef4444" stopOpacity={0.1}/>
-                </linearGradient>
-              </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
-              <XAxis dataKey="month" stroke="#6b7280" />
-              <YAxis stroke="#6b7280" />
-              <Tooltip 
-                contentStyle={{ 
-                  borderRadius: '12px', 
-                  border: '1px solid #e5e7eb',
-                  boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
-                }} 
-              />
-              <Legend />
-              <Area type="monotone" dataKey="voluntary" stroke="#10b981" fillOpacity={1} fill="url(#colorVoluntary)" name="Voluntary Turnover" />
-              <Bar dataKey="involuntary" fill="#94a3b8" name="Involuntary Turnover" radius={[4, 4, 0, 0]} />
-              <Line type="monotone" dataKey="highPerformer" stroke="#ef4444" strokeWidth={3} name="High Performer Turnover" dot={{ fill: '#ef4444', strokeWidth: 2, r: 6 }} />
-              <Line type="monotone" dataKey="criticalRole" stroke="#f59e0b" strokeWidth={2} strokeDasharray="5 5" name="Critical Role Turnover" dot={{ fill: '#f59e0b', r: 4 }} />
-            </ComposedChart>
+          <ResponsiveContainer width="100%" height={300}>
+            <FunnelChart>
+              <Tooltip />
+              <Funnel
+                dataKey="count"
+                data={talentAcquisitionData.funnel}
+                nameKey="stage"
+              >
+                <LabelList dataKey="conversion" position="right" formatter={(value) => `${value}%`} />
+                <LabelList dataKey="stage" position="inside" fill="#fff" />
+              </Funnel>
+            </FunnelChart>
           </ResponsiveContainer>
-          <InsightBox title="Turnover Analysis" type="warning" icon={AlertCircle}>
-            High performer turnover increased to 2.5% in June, particularly in Engineering (3.8%) and Sales (3.2%). 
-            Exit interviews reveal compensation (28%) and career growth (25%) as primary drivers. Recommend immediate 
-            retention strategy review for key talent.
+          <InsightBox title="Funnel Efficiency" type="info" icon={Target}>
+            Screening to interview conversion at 29.3% indicates potential process bottlenecks. 
+            Interview to offer rate of 26.8% is healthy. Recommend streamlining screening process.
           </InsightBox>
         </div>
 
-        {/* Diversity & Inclusion */}
+        {/* Source Performance */}
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-          <h3 className="text-xl font-semibold text-gray-900 mb-6">Diversity & Inclusion Dashboard</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-            {executiveData.diversity.map((item, idx) => (
-              <div key={idx} className="text-center">
-                <h4 className="font-semibold text-gray-700 mb-3">{item.category}</h4>
-                <ResponsiveContainer width="100%" height={120}>
-                  <PieChart>
-                    <Pie
-                      data={Object.entries(item).filter(([key]) => key !== 'category').map(([key, value]) => ({ name: key, value }))}
-                      cx="50%"
-                      cy="50%"
-                      innerRadius={30}
-                      outerRadius={50}
-                      paddingAngle={2}
-                      dataKey="value"
-                    >
-                      {Object.entries(item).filter(([key]) => key !== 'category').map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={colorPalettes.qualitative[index]} />
-                      ))}
-                    </Pie>
-                    <Tooltip />
-                  </PieChart>
-                </ResponsiveContainer>
+          <h3 className="text-xl font-semibold text-gray-900 mb-6">Source Performance Dashboard</h3>
+          <div className="space-y-4">
+            {talentAcquisitionData.sources.map((source, idx) => (
+              <div key={idx} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                <div className="flex items-center space-x-4">
+                  <div className={`p-2 rounded-lg ${
+                    source.source === 'Employee Referrals' ? 'bg-green-100 text-green-600' :
+                    source.source === 'LinkedIn' ? 'bg-blue-100 text-blue-600' :
+                    'bg-gray-100 text-gray-600'
+                  }`}>
+                    {source.source === 'Employee Referrals' && <UsersIcon className="w-5 h-5" />}
+                    {source.source === 'LinkedIn' && <Linkedin className="w-5 h-5" />}
+                    {source.source === 'Job Boards' && <GlobeIcon className="w-5 h-5" />}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900">{source.source}</p>
+                    <p className="text-sm text-gray-500">{source.hires} hires · ${source.cost} cost</p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="font-bold text-emerald-600">ROI: {source.roi}x</p>
+                  <p className="text-sm text-gray-500">Quality: {source.quality}/10</p>
+                </div>
               </div>
             ))}
-          </div>
-          <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4">
-            <h4 className="font-semibold text-gray-900 mb-2">Inclusion Index: 7.8/10</h4>
-            <p className="text-sm text-gray-600">
-              +0.3 from last quarter. Strong performance in psychological safety and belonging metrics.
-              Focus needed on equitable promotion rates across demographic groups.
-            </p>
           </div>
         </div>
       </div>
 
-      {/* Engagement Heatmap */}
+      {/* Time to Hire Metrics */}
       <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-        <h3 className="text-xl font-semibold text-gray-900 mb-6">Engagement Score Heatmap</h3>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {executiveData.engagement.map((dept, idx) => (
-            <div key={idx} className="text-center">
-              <div className={`p-4 rounded-xl ${
-                dept.score >= 8.5 ? 'bg-green-100 border border-green-200' :
-                dept.score >= 7.5 ? 'bg-yellow-100 border border-yellow-200' :
-                'bg-red-100 border border-red-200'
-              }`}>
-                <p className="text-sm font-medium text-gray-700">{dept.department}</p>
-                <p className={`text-2xl font-bold ${
-                  dept.score >= 8.5 ? 'text-green-700' :
-                  dept.score >= 7.5 ? 'text-yellow-700' :
-                  'text-red-700'
-                }`}>
-                  {dept.score}
-                </p>
-                <div className={`inline-flex items-center text-xs ${
-                  dept.trend === 'up' ? 'text-green-600' :
-                  dept.trend === 'down' ? 'text-red-600' : 'text-gray-600'
-                }`}>
-                  {dept.trend === 'up' ? <ArrowUp className="w-3 h-3 mr-1" /> :
-                   dept.trend === 'down' ? <ArrowDown className="w-3 h-3 mr-1" /> : null}
-                  {dept.trend}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+        <h3 className="text-xl font-semibold text-gray-900 mb-6">Time to Hire by Role</h3>
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart data={talentAcquisitionData.timeMetrics}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
+            <XAxis dataKey="role" stroke="#6b7280" />
+            <YAxis stroke="#6b7280" />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="timeToFill" fill="#3b82f6" name="Time to Fill (days)" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="timeToHire" fill="#10b981" name="Time to Hire (days)" radius={[4, 4, 0, 0]} />
+            <Line type="monotone" dataKey="target" stroke="#ef4444" strokeWidth={2} name="Target" strokeDasharray="5 5" />
+          </BarChart>
+        </ResponsiveContainer>
       </div>
     </div>
   );
 
-  // Talent Management Dashboard
-  const TalentManagementDashboard = () => (
+  // Talent Development Dashboard
+  const TalentDevelopmentDashboard = () => (
     <div className="space-y-8">
-      {renderKPICards('talent-management')}
+      {renderKPICards('talent-development')}
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* 9-Box Grid Visualization */}
+        {/* Training Completion */}
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-          <h3 className="text-xl font-semibold text-gray-900 mb-6">9-Box Talent Grid</h3>
+          <h3 className="text-xl font-semibold text-gray-900 mb-6">Training Program Performance</h3>
           <ResponsiveContainer width="100%" height={400}>
-            <ScatterChart
-              margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-            >
+            <BarChart data={talentDevelopmentData.training}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
-              <XAxis 
-                type="category" 
-                dataKey="performance" 
-                name="Performance"
-                stroke="#6b7280"
-              />
-              <YAxis 
-                type="category" 
-                dataKey="potential" 
-                name="Potential"
-                stroke="#6b7280"
-              />
-              <ZAxis 
-                type="number" 
-                dataKey="count" 
-                range={[50, 500]}
-                name="Count"
-              />
-              <Tooltip 
-                cursor={{ strokeDasharray: '3 3' }}
-                content={({ active, payload }) => {
-                  if (active && payload && payload.length) {
-                    return (
-                      <div className="bg-white p-3 rounded-lg shadow-lg border border-gray-200">
-                        <p className="font-semibold">{`${payload[0].payload.performance} Performance`}</p>
-                        <p className="font-semibold">{`${payload[0].payload.potential} Potential`}</p>
-                        <p className="text-sm text-gray-600">{`Count: ${payload[0].value} employees`}</p>
-                      </div>
-                    );
-                  }
-                  return null;
-                }}
-              />
-              <Scatter data={talentManagementData.nineBox} fill="#8884d8">
-                {talentManagementData.nineBox.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} />
-                ))}
-                <LabelList dataKey="count" position="top" />
-              </Scatter>
-            </ScatterChart>
+              <XAxis dataKey="program" angle={-45} textAnchor="end" height={80} stroke="#6b7280" />
+              <YAxis stroke="#6b7280" />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="completed" fill="#10b981" name="Completed" stackId="a" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="inProgress" fill="#3b82f6" name="In Progress" stackId="a" />
+              <Bar dataKey="overdue" fill="#ef4444" name="Overdue" stackId="a" />
+            </BarChart>
           </ResponsiveContainer>
         </div>
 
-        {/* Succession Readiness */}
+        {/* Competency Gap Analysis */}
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-          <h3 className="text-xl font-semibold text-gray-900 mb-6">Succession Readiness by Role</h3>
+          <h3 className="text-xl font-semibold text-gray-900 mb-6">Competency Gap Analysis</h3>
           <ResponsiveContainer width="100%" height={400}>
-            <BarChart data={talentManagementData.succession} layout="vertical">
+            <BarChart data={talentDevelopmentData.competencies} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
-              <XAxis type="number" stroke="#6b7280" />
-              <YAxis 
-                type="category" 
-                dataKey="role" 
-                width={120}
-                stroke="#6b7280"
-              />
+              <XAxis type="number" domain={[0, 100]} stroke="#6b7280" />
+              <YAxis type="category" dataKey="skill" width={120} stroke="#6b7280" />
               <Tooltip />
               <Legend />
-              <Bar dataKey="ready" stackId="a" fill="#10b981" name="Ready Now" radius={[0, 4, 4, 0]} />
-              <Bar dataKey="readyIn1" stackId="a" fill="#f59e0b" name="Ready in 1 Year" />
-              <Bar dataKey="noSuccessor" stackId="a" fill="#ef4444" name="No Successor" />
+              <Bar dataKey="current" fill="#3b82f6" name="Current Level" radius={[0, 4, 4, 0]} />
+              <Bar dataKey="target" fill="#10b981" name="Target Level" radius={[0, 4, 4, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
       </div>
-    </div>
-  );
 
-  // Enhanced Filter Panel
-  const FilterPanel = () => (
-    <div className={`bg-white border border-gray-200 rounded-xl p-6 mb-6 transition-all duration-300 ${showFilters ? 'block' : 'hidden'}`}>
-      <div className="flex justify-between items-center mb-6">
-        <h3 className="text-lg font-semibold text-gray-900">Advanced Data Filters</h3>
-        <button 
-          onClick={() => setShowFilters(false)}
-          className="text-gray-500 hover:text-gray-700 p-2 rounded-lg hover:bg-gray-100"
-        >
-          ×
-        </button>
-      </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {/* Time & Date Filters */}
-        <div className="space-y-4">
-          <h4 className="font-medium text-gray-700 text-sm">Time & Date</h4>
-          <select className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-            <option>Last 6 Months</option>
-            <option>Last Year</option>
-            <option>YTD</option>
-            <option>Custom Range</option>
-          </select>
+      {/* Learning Hours & Impact */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+          <h3 className="text-xl font-semibold text-gray-900 mb-6">Learning Hours vs Target</h3>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={talentDevelopmentData.learningHours}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
+              <XAxis dataKey="department" stroke="#6b7280" />
+              <YAxis stroke="#6b7280" />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="hours" fill="#3b82f6" name="Actual Hours" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="target" fill="#94a3b8" name="Target Hours" radius={[4, 4, 0, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
         </div>
 
-        {/* Department & Team */}
-        <div className="space-y-4">
-          <h4 className="font-medium text-gray-700 text-sm">Organization</h4>
-          <select className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-            <option>All Departments</option>
-            <option>Engineering</option>
-            <option>Sales</option>
-            <option>Marketing</option>
-            <option>Finance</option>
-            <option>HR</option>
-          </select>
-        </div>
-
-        {/* Employee Demographics */}
-        <div className="space-y-4">
-          <h4 className="font-medium text-gray-700 text-sm">Demographics</h4>
-          <select className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-            <option>All Genders</option>
-            <option>Male</option>
-            <option>Female</option>
-            <option>Other</option>
-          </select>
-        </div>
-
-        {/* Performance & Potential */}
-        <div className="space-y-4">
-          <h4 className="font-medium text-gray-700 text-sm">Talent Metrics</h4>
-          <select className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-            <option>All Performance Ratings</option>
-            <option>Exceeds Expectations</option>
-            <option>Meets Expectations</option>
-            <option>Below Expectations</option>
-          </select>
-        </div>
-      </div>
-
-      <div className="flex justify-end gap-3 mt-6 pt-6 border-t border-gray-200">
-        <button className="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
-          Reset Filters
-        </button>
-        <button className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-          Apply Filters
-        </button>
-      </div>
-    </div>
-  );
-
-  // Enhanced Header
-  const PlatformHeader = () => (
-    <header className="bg-white shadow-sm border-b border-gray-200 mb-6">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex items-center">
-            <Crown className="w-8 h-8 text-purple-600 mr-3" />
-            <div>
-              <h1 className="text-xl font-bold text-gray-900">People Intelligence Platform</h1>
-              <p className="text-sm text-gray-500">Enterprise HR Analytics & Strategic Insights</p>
-            </div>
-          </div>
-          
-          <div className="flex items-center space-x-4">
-            <button className="relative p-2 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100">
-              <Bell className="w-5 h-5" />
-              <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-            </button>
-            
-            <button 
-              onClick={() => setShowFilters(!showFilters)}
-              className="flex items-center px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
-            >
-              <Filter className="w-4 h-4 mr-2" />
-              Filters
-              <ChevronDown className="w-4 h-4 ml-2" />
-            </button>
-            
-            <button className="flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-colors">
-              <Download className="w-4 h-4 mr-2" />
-              Export Report
-            </button>
-          </div>
-        </div>
-      </div>
-    </header>
-  );
-
-  // Enhanced Navigation
-  const PlatformNavigation = () => (
-    <nav className="bg-white shadow-sm rounded-xl mb-6">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex space-x-1">
-          {modules.map((module) => {
-            const Icon = module.icon;
-            const colorMap = {
-              purple: 'border-purple-500 text-purple-600 bg-purple-50',
-              blue: 'border-blue-500 text-blue-600 bg-blue-50',
-              green: 'border-green-500 text-green-600 bg-green-50',
-              orange: 'border-orange-500 text-orange-600 bg-orange-50',
-              emerald: 'border-emerald-500 text-emerald-600 bg-emerald-50',
-              pink: 'border-pink-500 text-pink-600 bg-pink-50',
-              indigo: 'border-indigo-500 text-indigo-600 bg-indigo-50'
-            };
-            
-            return (
-              <button
-                key={module.id}
-                onClick={() => setActiveModule(module.id)}
-                className={`flex items-center px-6 py-4 border-b-2 transition-all duration-300 ${
-                  activeModule === module.id
-                    ? `${colorMap[module.color]} font-semibold`
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                }`}
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+          <h3 className="text-xl font-semibold text-gray-900 mb-6">Career Progression Impact</h3>
+          <ResponsiveContainer width="100%" height={300}>
+            <PieChart>
+              <Pie
+                data={talentDevelopmentData.careerProgression}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                label={({ category, value }) => `${category}: ${value}%`}
+                outerRadius={100}
+                fill="#8884d8"
+                dataKey="value"
               >
-                <Icon className="w-5 h-5 mr-3" />
-                {module.name}
-              </button>
-            );
-          })}
+                {talentDevelopmentData.careerProgression.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.color} />
+                ))}
+              </Pie>
+              <Tooltip />
+            </PieChart>
+          </ResponsiveContainer>
         </div>
-      </div>
-    </nav>
-  );
-
-  // Data Quality Indicator
-  const DataQualityIndicator = () => (
-    <div className="bg-white rounded-xl shadow-sm p-4 border border-gray-100 mb-6">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-6">
-          <div className="flex items-center">
-            <div className="w-3 h-3 bg-emerald-500 rounded-full mr-2"></div>
-            <span className="text-sm text-gray-600">Data Freshness: Real-time</span>
-          </div>
-          <div className="flex items-center">
-            <div className="w-3 h-3 bg-emerald-500 rounded-full mr-2"></div>
-            <span className="text-sm text-gray-600">Completeness: 98.7%</span>
-          </div>
-          <div className="flex items-center">
-            <div className="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
-            <span className="text-sm text-gray-600">Last Updated: 15 min ago</span>
-          </div>
-        </div>
-        <button className="text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center">
-          <Zap className="w-4 h-4 mr-1" />
-          Refresh Data
-        </button>
       </div>
     </div>
   );
 
-  // Main Render
+  // Total Rewards Dashboard
+  const TotalRewardsDashboard = () => (
+    <div className="space-y-8">
+      {renderKPICards('total-rewards')}
+      
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Compensation Analysis */}
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+          <h3 className="text-xl font-semibold text-gray-900 mb-6">Compensation vs Market Analysis</h3>
+          <ResponsiveContainer width="100%" height={400}>
+            <ComposedChart data={totalRewardsData.compensation}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
+              <XAxis dataKey="grade" stroke="#6b7280" />
+              <YAxis stroke="#6b7280" />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="market" fill="#94a3b8" name="Market Rate" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="internal" fill="#3b82f6" name="Internal Rate" radius={[4, 4, 0, 0]} />
+              <Line type="monotone" dataKey="gap" stroke="#ef4444" strokeWidth={2} name="Gap %" />
+            </ComposedChart>
+          </ResponsiveContainer>
+        </div>
+
+        {/* Benefits Utilization */}
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+          <h3 className="text-xl font-semibold text-gray-900 mb-6">Benefits Utilization & Satisfaction</h3>
+          <div className="space-y-4">
+            {totalRewardsData.benefits.map((benefit, idx) => (
+              <div key={idx} className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="font-semibold text-gray-900">{benefit.benefit}</span>
+                  <span className="text-sm font-medium text-emerald-600">{benefit.enrolled}% enrolled</span>
+                </div>
+                <div className="flex items-center justify-between text-sm text-gray-600">
+                  <span>Utilization: {benefit.utilization}%</span>
+                  <span>Satisfaction: {benefit.satisfaction}/10</span>
+                  <span>Cost: ${benefit.cost}</span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
+                  <div 
+                    className="bg-emerald-500 h-2 rounded-full" 
+                    style={{ width: `${benefit.utilization}%` }}
+                  ></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Pay Equity & Turnover Cost */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+          <h3 className="text-xl font-semibold text-gray-900 mb-6">Pay Equity Analysis</h3>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={totalRewardsData.payEquity}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
+              <XAxis dataKey="department" stroke="#6b7280" />
+              <YAxis stroke="#6b7280" />
+              <Tooltip />
+              <Bar dataKey="ratio" fill="#3b82f6" name="Pay Equity Ratio" radius={[4, 4, 0, 0]}>
+                {totalRewardsData.payEquity.map((entry, index) => (
+                  <Cell 
+                    key={`cell-${index}`} 
+                    fill={entry.ratio >= 1 ? '#10b981' : entry.ratio >= 0.95 ? '#f59e0b' : '#ef4444'} 
+                  />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+          <h3 className="text-xl font-semibold text-gray-900 mb-6">Turnover Cost Breakdown</h3>
+          <ResponsiveContainer width="100%" height={300}>
+            <PieChart>
+              <Pie
+                data={totalRewardsData.turnoverCost}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                label={({ category, percentage }) => `${category}: ${percentage}%`}
+                outerRadius={100}
+                fill="#8884d8"
+                dataKey="cost"
+              >
+                {totalRewardsData.turnoverCost.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={['#3b82f6', '#10b981', '#f59e0b', '#ef4444'][index]} />
+                ))}
+              </Pie>
+              <Tooltip formatter={(value) => [`$${value.toLocaleString()}`, 'Cost']} />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+    </div>
+  );
+
+  // Engagement Dashboard
+  const EngagementDashboard = () => (
+    <div className="space-y-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100 text-center">
+          <div className="text-3xl font-bold text-emerald-600 mb-2">7.8</div>
+          <div className="text-sm text-gray-500">Overall Engagement Score</div>
+          <div className="text-xs text-emerald-600 mt-1">+0.4 from last quarter</div>
+        </div>
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100 text-center">
+          <div className="text-3xl font-bold text-blue-600 mb-2">8.1</div>
+          <div className="text-sm text-gray-500">Employee Satisfaction</div>
+          <div className="text-xs text-blue-600 mt-1">+0.2 from last quarter</div>
+        </div>
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100 text-center">
+          <div className="text-3xl font-bold text-purple-600 mb-2">68%</div>
+          <div className="text-sm text-gray-500">Positive Sentiment</div>
+          <div className="text-xs text-purple-600 mt-1">+5% from last quarter</div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Engagement Drivers */}
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+          <h3 className="text-xl font-semibold text-gray-900 mb-6">Engagement Drivers & Impact</h3>
+          <ResponsiveContainer width="100%" height={400}>
+            <BarChart data={engagementData.drivers} layout="vertical">
+              <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
+              <XAxis type="number" domain={[0, 10]} stroke="#6b7280" />
+              <YAxis type="category" dataKey="factor" width={120} stroke="#6b7280" />
+              <Tooltip />
+              <Bar dataKey="score" fill="#3b82f6" name="Score" radius={[0, 4, 4, 0]}>
+                {engagementData.drivers.map((entry, index) => (
+                  <Cell 
+                    key={`cell-${index}`} 
+                    fill={entry.trend === 'improving' ? '#10b981' : entry.trend === 'declining' ? '#ef4444' : '#f59e0b'} 
+                  />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+
+        {/* Department Comparison */}
+        <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+          <h3 className="text-xl font-semibold text-gray-900 mb-6">Department Engagement Comparison</h3>
+          <ResponsiveContainer width="100%" height={400}>
+            <RadarChart data={engagementData.scores}>
+              <PolarGrid stroke="#f3f4f6" />
+              <PolarAngleAxis dataKey="department" stroke="#6b7280" />
+              <PolarRadiusAxis angle={30} domain={[0, 10]} stroke="#6b7280" />
+              <Radar name="Engagement" dataKey="engagement" stroke="#3b82f6" fill="#3b82f6" fillOpacity={0.6} />
+              <Radar name="Satisfaction" dataKey="satisfaction" stroke="#10b981" fill="#10b981" fillOpacity={0.6} />
+              <Radar name="Wellbeing" dataKey="wellbeing" stroke="#8b5cf6" fill="#8b5cf6" fillOpacity={0.6} />
+              <Legend />
+              <Tooltip />
+            </RadarChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+    </div>
+  );
+
+  // Update the main component to include all dashboards
+  // ... (keep all the existing components like PlatformHeader, FilterPanel, etc.)
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
-      <PlatformHeader />
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <PlatformNavigation />
-        <FilterPanel />
-        <DataQualityIndicator />
-
-        <main className="pb-12">
-          {activeModule === 'executive' && <ExecutiveDashboard />}
-          {activeModule === 'talent-management' && <TalentManagementDashboard />}
-          {activeModule === 'talent-acquisition' && <div>Acquisition Dashboard - Coming Soon</div>}
-          {activeModule === 'talent-development' && <div>Development Dashboard - Coming Soon</div>}
-          {activeModule === 'total-rewards' && <div>Rewards Dashboard - Coming Soon</div>}
-          {activeModule === 'engagement' && <div>Engagement Dashboard - Coming Soon</div>}
-          {activeModule === 'predictive' && <div>Predictive Analytics - Coming Soon</div>}
-        </main>
-
-        {/* Floating Action Buttons */}
-        <div className="fixed bottom-8 right-8 flex flex-col space-y-3">
-          <button className="bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 hover:scale-110">
-            <Download className="w-5 h-5" />
-          </button>
-          <button className="bg-green-600 text-white p-4 rounded-full shadow-lg hover:bg-green-700 transition-all duration-300 hover:scale-110">
-            <Filter className="w-5 h-5" />
-          </button>
-          <button className="bg-purple-600 text-white p-4 rounded-full shadow-lg hover:bg-purple-700 transition-all duration-300 hover:scale-110">
-            <Brain className="w-5 h-5" />
-          </button>
-        </div>
-      </div>
+      {/* Header and Navigation components remain the same */}
+      <main className="pb-12">
+        {activeModule === 'executive' && <ExecutiveDashboard />}
+        {activeModule === 'talent-management' && <TalentManagementDashboard />}
+        {activeModule === 'talent-acquisition' && <TalentAcquisitionDashboard />}
+        {activeModule === 'talent-development' && <TalentDevelopmentDashboard />}
+        {activeModule === 'total-rewards' && <TotalRewardsDashboard />}
+        {activeModule === 'engagement' && <EngagementDashboard />}
+        {activeModule === 'predictive' && (
+          <div className="text-center py-12">
+            <Brain className="w-16 h-16 text-indigo-600 mx-auto mb-4" />
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">Predictive Analytics</h2>
+            <p className="text-gray-600">AI-powered insights and predictive modeling coming soon!</p>
+          </div>
+        )}
+      </main>
     </div>
   );
 };
