@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { Users, TrendingUp, Target, Award, DollarSign, UserCheck, AlertCircle, Calendar } from 'lucide-react';
+import { Users, TrendingUp, Target, Award, DollarSign, UserCheck, AlertCircle, Calendar, Filter, Download, Bell, ChevronDown, ArrowUp, ArrowDown, BookOpen, Briefcase, Shield, Clock } from 'lucide-react';
 
 function App() {
   const [activeModule, setActiveModule] = useState('overview');
@@ -21,6 +21,13 @@ function App() {
     { month: 'Jun', rate: 13.8 }
   ];
 
+  const modules = [
+    { id: 'overview', name: 'Overview', icon: TrendingUp },
+    { id: 'acquisition', name: 'Acquisition', icon: UserCheck },
+    { id: 'development', name: 'Development', icon: Target },
+    { id: 'rewards', name: 'Rewards', icon: DollarSign }
+  ];
+
   const kpiCards = [
     { label: 'Total Headcount', value: '2,847', change: '+3.2%', trend: 'up', icon: Users },
     { label: 'Turnover Rate', value: '13.8%', change: '-1.2%', trend: 'down', icon: AlertCircle },
@@ -29,27 +36,69 @@ function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">People Analytics Platform</h1>
-          <p className="text-gray-600">HR Analytics Dashboard</p>
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <header className="bg-white shadow-sm border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center">
+              <TrendingUp className="w-8 h-8 text-emerald-600 mr-3" />
+              <div>
+                <h1 className="text-xl font-bold text-gray-900">People Analytics Platform</h1>
+                <p className="text-sm text-gray-500">HR Analytics Dashboard</p>
+              </div>
+            </div>
+          </div>
         </div>
+      </header>
 
+      {/* Navigation */}
+      <nav className="bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex space-x-8">
+            {modules.map((module) => {
+              const Icon = module.icon;
+              return (
+                <button
+                  key={module.id}
+                  onClick={() => setActiveModule(module.id)}
+                  className={`flex items-center px-4 py-3 border-b-2 transition-colors ${
+                    activeModule === module.id
+                      ? 'border-emerald-500 text-emerald-600 bg-emerald-50'
+                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  }`}
+                >
+                  <Icon className="w-5 h-5 mr-2" />
+                  {module.name}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </nav>
+
+      {/* Main Content */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {/* KPI Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           {kpiCards.map((kpi, idx) => {
             const Icon = kpi.icon;
             return (
-              <div key={idx} className="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-gray-500">{kpi.label}</p>
-                    <p className="text-2xl font-bold text-gray-900 mt-1">{kpi.value}</p>
-                    <p className={`text-sm font-medium ${kpi.trend === 'up' ? 'text-green-600' : 'text-red-600'}`}>
-                      {kpi.change}
-                    </p>
+              <div key={idx} className="bg-white rounded-lg shadow-sm p-5 border border-gray-100">
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-gray-500 mb-1">{kpi.label}</p>
+                    <p className="text-2xl font-bold text-gray-900 mb-2">{kpi.value}</p>
+                    <div className="flex items-center">
+                      {kpi.trend === 'up' ? (
+                        <ArrowUp className="w-4 h-4 text-emerald-600 mr-1" />
+                      ) : (
+                        <ArrowDown className="w-4 h-4 text-red-500 mr-1" />
+                      )}
+                      <span className={`text-sm font-medium ${kpi.trend === 'up' ? 'text-emerald-600' : 'text-red-600'}`}>
+                        {kpi.change}
+                      </span>
+                    </div>
                   </div>
                   <div className="bg-emerald-50 p-3 rounded-lg">
                     <Icon className="w-6 h-6 text-emerald-600" />
@@ -108,7 +157,7 @@ function App() {
             Turnover has increased 14% compared to last quarter. Focus on retention strategies for high-performing employees.
           </p>
         </div>
-      </div>
+      </main>
     </div>
   );
 }
